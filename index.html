@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Palm Beach Ski Club</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎿</text></svg>">
   <style>
     * {
       margin: 0;
@@ -16,6 +17,7 @@
       color: #ffffff;
       font-family: 'Georgia', serif;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
       min-height: 100vh;
@@ -24,43 +26,130 @@
     }
 
     .container {
-      max-width: 600px;
+      max-width: 640px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .logo-svg {
+      width: 180px;
+      height: 180px;
+      margin-bottom: 2rem;
+      opacity: 0.92;
     }
 
     h1 {
-      font-size: 2.8rem;
-      letter-spacing: 0.05em;
-      margin-bottom: 1.5rem;
+      font-size: 2.6rem;
+      letter-spacing: 0.06em;
+      margin-bottom: 1.2rem;
       color: #ffffff;
+      line-height: 1.2;
     }
 
     .divider {
       width: 60px;
       height: 2px;
-      background-color: #a0b8d8;
-      margin: 0 auto 1.5rem;
+      background-color: #7fafd4;
+      margin: 0 auto 1.4rem;
     }
 
-    p {
-      font-size: 1.2rem;
+    .tagline {
+      font-size: 1.1rem;
       color: #a0b8d8;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
+      margin-bottom: 2rem;
     }
 
-    .emoji {
-      font-size: 2rem;
-      margin-top: 2rem;
-      display: block;
+    .email-link {
+      display: inline-block;
+      font-size: 0.95rem;
+      color: #7fafd4;
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      border-bottom: 1px solid rgba(127, 175, 212, 0.4);
+      padding-bottom: 2px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .email-link:hover {
+      color: #b8d4ec;
+      border-color: rgba(184, 212, 236, 0.7);
+    }
+
+    footer {
+      width: 100%;
+      padding: 1.5rem 2rem;
+      text-align: center;
+      font-size: 0.78rem;
+      color: #4a6080;
+      letter-spacing: 0.05em;
     }
   </style>
 </head>
 <body>
+
   <div class="container">
+
+    <!-- Inline SVG logo: mountain + skier scene -->
+    <svg class="logo-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-label="Palm Beach Ski Club">
+      <!-- Sky background circle -->
+      <circle cx="100" cy="100" r="96" fill="#0d1f3c" stroke="#2a4a6e" stroke-width="2"/>
+
+      <!-- Snow mountains -->
+      <polygon points="100,30 145,110 55,110" fill="#d6e8f5"/>
+      <polygon points="100,30 108,48 92,48" fill="#ffffff"/>
+
+      <polygon points="148,55 183,115 113,115" fill="#b8d4ec"/>
+      <polygon points="148,55 155,70 141,70" fill="#e8f3fb"/>
+
+      <polygon points="52,65 82,115 22,115" fill="#c5ddf0"/>
+      <polygon points="52,65 58,78 46,78" fill="#edf5fc"/>
+
+      <!-- Base snow -->
+      <ellipse cx="100" cy="140" rx="80" ry="18" fill="#ddeef8" opacity="0.6"/>
+
+      <!-- Ski tracks -->
+      <line x1="68" y1="138" x2="88" y2="118" stroke="#aaccee" stroke-width="1.5" stroke-linecap="round" opacity="0.7"/>
+      <line x1="74" y1="138" x2="94" y2="118" stroke="#aaccee" stroke-width="1.5" stroke-linecap="round" opacity="0.7"/>
+
+      <!-- Skier -->
+      <!-- Body -->
+      <circle cx="115" cy="107" r="5" fill="#f4c26a"/>
+      <line x1="115" y1="112" x2="113" y2="124" stroke="#e8e8e8" stroke-width="2.5" stroke-linecap="round"/>
+      <!-- Arms -->
+      <line x1="113" y1="116" x2="107" y2="121" stroke="#e8e8e8" stroke-width="2" stroke-linecap="round"/>
+      <line x1="113" y1="116" x2="122" y2="119" stroke="#e8e8e8" stroke-width="2" stroke-linecap="round"/>
+      <!-- Legs + skis -->
+      <line x1="113" y1="124" x2="108" y2="130" stroke="#e8e8e8" stroke-width="2" stroke-linecap="round"/>
+      <line x1="113" y1="124" x2="118" y2="130" stroke="#e8e8e8" stroke-width="2" stroke-linecap="round"/>
+      <line x1="105" y1="131" x2="117" y2="130" stroke="#f4c26a" stroke-width="2" stroke-linecap="round"/>
+      <line x1="115" y1="131" x2="127" y2="130" stroke="#f4c26a" stroke-width="2" stroke-linecap="round"/>
+      <!-- Poles -->
+      <line x1="107" y1="121" x2="103" y2="130" stroke="#aaaaaa" stroke-width="1.5" stroke-linecap="round"/>
+      <line x1="122" y1="119" x2="126" y2="129" stroke="#aaaaaa" stroke-width="1.5" stroke-linecap="round"/>
+
+      <!-- Stars -->
+      <circle cx="40" cy="45" r="1.2" fill="#ffffff" opacity="0.8"/>
+      <circle cx="160" cy="38" r="1" fill="#ffffff" opacity="0.7"/>
+      <circle cx="170" cy="60" r="0.8" fill="#ffffff" opacity="0.5"/>
+      <circle cx="28" cy="70" r="1" fill="#ffffff" opacity="0.6"/>
+      <circle cx="155" cy="75" r="0.7" fill="#ffffff" opacity="0.5"/>
+    </svg>
+
     <h1>Palm Beach Ski Club</h1>
     <div class="divider"></div>
-    <p>Currently at après — check back soon</p>
-    <span class="emoji">🎿🍹</span>
+    <p class="tagline">Currently at après &mdash; check back soon</p>
+    <a class="email-link" href="mailto:info@palmbeachskiclub.com">info@palmbeachskiclub.com</a>
+
   </div>
+
+  <footer>
+    Palm Beach Ski Club&trade; &nbsp;&bull;&nbsp; &copy; 2026 All rights reserved
+  </footer>
+
 </body>
 </html>

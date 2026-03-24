@@ -5,18 +5,71 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Merch – Palm Beach Ski Club</title>
   <style>
-    body { margin:0; font-family: 'Poppins', sans-serif; background:#0a1628; color:#eef4ff; min-height:100vh; display:flex; align-items:center; justify-content:center; padding:1.5rem; }
-    .card { background: rgba(12, 24, 44, 0.78); border:1px solid rgba(131, 178, 227, 0.45); border-radius:16px; padding: 1.8rem; max-width:520px; text-align:center; }
-    h1 { margin-bottom:0.8rem; font-family:'Playfair Display', serif; font-size:2rem; }
-    p { margin-bottom:1.2rem; color:#b4cced; }
-    a.button { display:inline-block; background:#abd7ff; color:#0f2f55; padding:0.72rem 1.2rem; border-radius:999px; text-decoration:none; font-weight:700; }
+    :root { color-scheme: dark; }
+    body { margin:0; font-family:'Poppins',sans-serif; background:#091222; color:#e9f4ff; min-height:100vh; }
+    .layout { max-width:1120px; margin:0 auto; padding:2rem 1rem; }
+    .header { display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem; flex-wrap:wrap; gap:1rem; }
+    .header h1 { margin:0; font-family:'Crimson Pro','Playfair Display',serif; font-size:clamp(1.8rem,2.5vw,2.8rem); letter-spacing:0.03em; }
+    .header p { margin:0; color:#aac8e8; }
+    .btn-back, .btn-join {
+      border-radius:999px; border:1px solid rgba(173, 215, 255, 0.7); padding:0.7rem 1rem; text-decoration:none; font-weight:700;
+      color:#eef8ff; background:rgba(28,63,105,0.9); transition:background .2s,transform .2s;
+    }
+    .btn-back:hover, .btn-join:hover { background:rgba(45,91,145,0.95); transform:translateY(-2px); }
+    .products { display:grid; gap:1rem; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); }
+    .product { position:relative; border:1px solid rgba(131,178,227,0.35); border-radius:15px; overflow:hidden; background:linear-gradient(145deg,#102443,#0b192f); box-shadow:0 18px 35px rgba(0,0,0,0.35); }
+    .product img { width:100%; height:220px; object-fit:cover; filter:blur(1.5px); transform:scale(1.02); }
+    .product-content { position:absolute; inset:0; display:flex; flex-direction:column; justify-content:flex-end; gap:0.5rem; padding:1rem; background:linear-gradient(to top,rgba(5,10,18,0.9),rgba(5,10,18,0.15)); }
+    .product-title { margin:0; color:#fff; font-size:1.07rem; letter-spacing:0.03em; }
+    .product-tag { font-size:0.82rem; color:#94b7de; text-transform:uppercase; }
+    .sold-out { display:inline-block; align-self:flex-start; background:rgba(255,255,255,0.97); color:#0c2a5f; font-weight:800; font-size:0.8rem; letter-spacing:0.06em; text-transform:uppercase; border-radius:999px; padding:0.3rem 0.65rem; }
+    .join-notice { margin-top:1.5rem; text-align:center; color:#c9ddf6; }
+    .join-notice a { color:#abd7ff; text-decoration:none; font-weight:700; }
+    .join-notice a:hover { text-decoration:underline; }
+    @media (max-width:720px){ .header{flex-direction:column;align-items:flex-start;} .product img{height:180px;} }
   </style>
 </head>
 <body>
-  <div class="card">
-    <h1>Merch Store (Coming Soon)</h1>
-    <p>Our Palm Beach Ski Club merch is on the way. Stay tuned for branded jackets, hats, and more.</p>
-    <a class="button" href="index.html">Back to home</a>
+  <div class="layout">
+    <div class="header">
+      <div>
+        <h1>Merch Collection</h1>
+        <p>Current drop sold out. Join waitlist for the next release.</p>
+      </div>
+      <div>
+        <a class="btn-back" href="index.html">Back to Home</a>
+        <a class="btn-join" href="index.html#join">Join Waitlist</a>
+      </div>
+    </div>
+
+    <div class="products">
+      <article class="product">
+        <img src="https://images.unsplash.com/photo-1519744792095-2f2205e87b6f?auto=format&fit=crop&w=850&q=80" alt="Palm Beach Ski Club Tee">
+        <div class="product-content">
+          <span class="product-title">PBSC Performance Tee</span>
+          <span class="product-tag">Midweight cotton blend</span>
+          <span class="sold-out">Sold Out</span>
+        </div>
+      </article>
+      <article class="product">
+        <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=850&q=80" alt="PBSC Trucker Hat">
+        <div class="product-content">
+          <span class="product-title">Beach + Ski Trucker Hat</span>
+          <span class="product-tag">Embossed club logo</span>
+          <span class="sold-out">Sold Out</span>
+        </div>
+      </article>
+      <article class="product">
+        <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=850&q=80" alt="PBSC Hoodie">
+        <div class="product-content">
+          <span class="product-title">Palm Beach Hoodie</span>
+          <span class="product-tag">Fleece-lined comfort</span>
+          <span class="sold-out">Sold Out</span>
+        </div>
+      </article>
+    </div>
+
+    <p class="join-notice">Every item is sold out for this drop. <a href="index.html#join">Join the waitlist</a> to get notified about the next release.</p>
   </div>
 </body>
 </html>

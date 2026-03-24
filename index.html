@@ -151,7 +151,17 @@
       border: 1px solid rgba(154, 205, 255, 0.7);
       border-radius: 999px;
       font-weight: 700;
+      text-decoration: none;
       transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
+
+    .action-buttons a.active,
+    .action-buttons a.active:hover {
+      transform: translateY(-2px);
+      background: #7cc3ff;
+      box-shadow: 0 10px 22px rgba(30, 117, 184, 0.45);
+      color: #0e2c52;
+      border-color: rgba(204, 230, 255, 0.9);
     }
 
     .cta-secondary:hover {
@@ -190,19 +200,28 @@
     }
 
     .forms-grid {
-      display: grid;
+      display: none;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 1rem;
       margin-top: 1.3rem;
       text-align: left;
     }
 
+    .forms-grid.active {
+      display: grid;
+    }
+
     .form-card {
+      display: none;
       background: rgba(20, 45, 72, 0.75);
       border: 1px solid rgba(167, 206, 244, 0.42);
       border-radius: 14px;
       padding: 1.1rem;
       box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
+    }
+
+    .form-card.active {
+      display: block;
     }
 
     .form-card h3 {
@@ -289,10 +308,10 @@
 
         <h1>Palm Beach Ski Club</h1>
         <p class="tagline">Currently at après — check back soon</p>
-        <div style="display:flex;gap:0.9rem;flex-wrap:wrap;justify-content:center;">
-          <a class="email-link" href="#contact">Contact Us</a>
+        <div class="action-buttons" style="display:flex;gap:0.9rem;flex-wrap:wrap;justify-content:center;">
+          <a class="email-link" href="javascript:showForm('contact')">Contact Us</a>
           <a class="cta-secondary" href="merch.html">Merch</a>
-          <a class="cta-primary" href="#join">Join Waitlist</a>
+          <a class="cta-primary" href="javascript:showForm('join')">Join Waitlist</a>
         </div>
       </div>
 
@@ -311,8 +330,8 @@
         </article>
       </div>
 
-      <section class="forms-grid" aria-label="Join and Contact forms">
-        <article class="form-card" id="join">
+      <section class="forms-grid" id="forms-grid" aria-label="Join and Contact forms">
+        <article class="form-card" id="join-card">
           <h3>Join Waitlist</h3>
           <form onsubmit="return sendForm(event, 'join')" autocomplete="on">
             <div class="form-field">
@@ -345,7 +364,7 @@
           </form>
         </article>
 
-        <article class="form-card" id="contact">
+        <article class="form-card" id="contact-card">
           <h3>Contact Us</h3>
           <form onsubmit="return sendForm(event, 'contact')" autocomplete="on">
             <div class="form-field">
@@ -425,6 +444,30 @@
       }
 
       return false;
+    }
+
+    function showForm(type) {
+      var formsGrid = document.getElementById('forms-grid');
+      var joinCard = document.getElementById('join-card');
+      var contactCard = document.getElementById('contact-card');
+
+      formsGrid.classList.add('active');
+      joinCard.classList.remove('active');
+      contactCard.classList.remove('active');
+
+      // button active state
+      var actionButtons = document.querySelectorAll('.action-buttons a');
+      actionButtons.forEach(function(btn){ btn.classList.remove('active'); });
+
+      if (type === 'join') {
+        joinCard.classList.add('active');
+        document.querySelector('.cta-primary').classList.add('active');
+        joinCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } else if (type === 'contact') {
+        contactCard.classList.add('active');
+        document.querySelector('.email-link').classList.add('active');
+        contactCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
     }
 
     // Slow down background video

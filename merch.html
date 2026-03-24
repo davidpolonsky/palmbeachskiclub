@@ -20,6 +20,8 @@
     .product { position:relative; border:1px solid rgba(131,178,227,0.35); border-radius:15px; overflow:hidden; background:linear-gradient(145deg,#102443,#0b192f); box-shadow:0 18px 35px rgba(0,0,0,0.35); }
     .product img { width:100%; height:220px; object-fit:cover; filter:blur(1.5px); transform:scale(1.02); }
     .product-content { position:absolute; inset:0; display:flex; flex-direction:column; justify-content:flex-end; gap:0.5rem; padding:1rem; background:linear-gradient(to top,rgba(5,10,18,0.9),rgba(5,10,18,0.15)); }
+    .product-logo { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; pointer-events:none; }
+    .product-logo img { width:90px; height:90px; object-fit:contain; opacity:0.55; filter:drop-shadow(0 4px 14px rgba(0,0,0,0.36)); }
     .product-title { margin:0; color:#fff; font-size:1.07rem; letter-spacing:0.03em; }
     .product-tag { font-size:0.82rem; color:#94b7de; text-transform:uppercase; }
     .sold-out { display:inline-block; align-self:flex-start; background:rgba(255,255,255,0.97); color:#0c2a5f; font-weight:800; font-size:0.8rem; letter-spacing:0.06em; text-transform:uppercase; border-radius:999px; padding:0.3rem 0.65rem; }
@@ -45,6 +47,7 @@
     <div class="products">
       <article class="product">
         <img src="https://images.unsplash.com/photo-1519744792095-2f2205e87b6f?auto=format&fit=crop&w=850&q=80" alt="Palm Beach Ski Club Tee">
+        <div class="product-logo"><img src="logo.png" alt="PBSC Logo"></div>
         <div class="product-content">
           <span class="product-title">PBSC Performance Tee</span>
           <span class="product-tag">Midweight cotton blend</span>
@@ -53,6 +56,7 @@
       </article>
       <article class="product">
         <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=850&q=80" alt="PBSC Trucker Hat">
+        <div class="product-logo"><img src="logo.png" alt="PBSC Logo"></div>
         <div class="product-content">
           <span class="product-title">Beach + Ski Trucker Hat</span>
           <span class="product-tag">Embossed club logo</span>
@@ -61,6 +65,7 @@
       </article>
       <article class="product">
         <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=850&q=80" alt="PBSC Hoodie">
+        <div class="product-logo"><img src="logo.png" alt="PBSC Logo"></div>
         <div class="product-content">
           <span class="product-title">Palm Beach Hoodie</span>
           <span class="product-tag">Fleece-lined comfort</span>

@@ -206,6 +206,7 @@
       gap: 1rem;
       margin-top: 1.2rem;
       text-align: left;
+      perspective: 1000px;
     }
 
     .feature {
@@ -215,6 +216,23 @@
       padding: 1rem;
       min-height: 110px;
       box-shadow: inset 0 0 14px rgba(8, 16, 29, 0.3);
+      transition: transform 0.35s cubic-bezier(0.23, 1, 0.320, 1), box-shadow 0.35s ease;
+      transform-style: preserve-3d;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .feature:hover {
+      transform: rotateX(4deg) rotateY(-6deg) translateZ(10px);
+      box-shadow: 0 20px 40px rgba(35, 82, 133, 0.4), inset 0 0 14px rgba(8, 16, 29, 0.3);
+    }
+
+    .feature-icon {
+      width: 32px;
+      height: 32px;
+      margin-bottom: 0.6rem;
+      opacity: 0.85;
+      filter: drop-shadow(0 2px 4px rgba(167, 206, 244, 0.3));
     }
 
     .feature h3 {
@@ -299,12 +317,88 @@
       font-weight: 700;
       cursor: pointer;
       transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
     }
 
     .form-card button:hover {
       transform: translateY(-1px);
       background: #c1ebff;
       box-shadow: 0 10px 20px rgba(31, 81, 130, 0.36);
+    }
+
+    .form-card button:disabled {
+      opacity: 0.8;
+      cursor: not-allowed;
+    }
+
+    .spinner {
+      width: 14px;
+      height: 14px;
+      border: 2px solid rgba(15, 47, 85, 0.3);
+      border-top-color: #0f2f55;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      display: none;
+    }
+
+    .form-card button.loading .spinner {
+      display: inline-block;
+    }
+
+    .form-card button.loading {
+      pointer-events: none;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .form-validation {
+      font-size: 0.75rem;
+      color: #ffb3b3;
+      margin-top: 0.2rem;
+      display: none;
+    }
+
+    .form-validation.show {
+      display: block;
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: rgba(20, 50, 80, 0.95);
+      border: 1px solid rgba(167, 206, 244, 0.5);
+      border-radius: 12px;
+      padding: 1rem 1.4rem;
+      color: #d9f1ff;
+      font-weight: 600;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+      animation: slideIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      z-index: 9999;
+      max-width: 280px;
+    }
+
+    .toast.success {
+      border-color: rgba(110, 231, 183, 0.5);
+      background: rgba(6, 50, 30, 0.95);
+      color: #6ee7b7;
+    }
+
+    .toast.error {
+      border-color: rgba(252, 165, 165, 0.5);
+      background: rgba(80, 20, 20, 0.95);
+      color: #fca5a5;
+    }
+
+    @keyframes slideIn {
+      0% { transform: translateX(400px) scale(0.9); opacity: 0; }
+      100% { transform: translateX(0) scale(1); opacity: 1; }
     }
 
     footer {
@@ -347,14 +441,25 @@
 
       <div class="feature-grid" aria-label="Club features">
         <article class="feature">
+          <svg class="feature-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 1L15 10H24L17 14L20 23L12 19L4 23L7 14L0 10H9L12 1Z" fill="#8dcdfd" stroke="#a7cef4" stroke-width="0.5"/>
+          </svg>
           <h3>Snow & Sun</h3>
           <p>World-class skiing events and luxury après-ski social evenings, curated for community and comfort.</p>
         </article>
         <article class="feature">
+          <svg class="feature-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2L4 8V20C4 21.1 4.9 22 6 22H18C19.1 22 20 21.1 20 20V8L12 2Z" fill="#80d9ff" stroke="#a7cef4" stroke-width="0.5"/>
+            <path d="M12 11L8 15L16 15L12 11Z" fill="#a7cef4"/>
+          </svg>
           <h3>Premium Community</h3>
           <p>Connect with passionate outdoors people, pro coaching, and member-only ski retreats each season.</p>
         </article>
         <article class="feature">
+          <svg class="feature-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="12" cy="12" r="10" fill="none" stroke="#8dcdfd" stroke-width="1.5"/>
+            <path d="M12 7V12L16 16" stroke="#80d9ff" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
           <h3>Club Experiences</h3>
           <p>Seasonal journeys, charity races, and VIP ski parties in aspirational mountain venues.</p>
         </article>
@@ -367,10 +472,12 @@
             <div class="form-field">
               <label for="join-name">Full Name</label>
               <input id="join-name" name="name" type="text" placeholder="Jane Ski" required>
+              <span class="form-validation">Please enter your name</span>
             </div>
             <div class="form-field">
               <label for="join-email">Email</label>
               <input id="join-email" name="email" type="email" placeholder="jane@example.com" required>
+              <span class="form-validation">Please enter a valid email</span>
             </div>
             <div class="form-field">
               <label for="join-level">Ski Level</label>
@@ -381,6 +488,7 @@
                 <option>Advanced</option>
                 <option>Expert / Pro</option>
               </select>
+              <span class="form-validation">Please select your ski level</span>
             </div>
             <div class="form-field">
               <label for="join-terrain">Favorite Terrain</label>
@@ -390,7 +498,7 @@
               <label for="join-msg">Message (optional)</label>
               <textarea id="join-msg" name="message" placeholder="Tell us why you want to join"></textarea>
             </div>
-            <button type="submit">Send Join Request</button>
+            <button type="submit"><span class="spinner"></span>Send Join Request</button>
           </form>
         </article>
 
@@ -400,20 +508,24 @@
             <div class="form-field">
               <label for="contact-name">Your Name</label>
               <input id="contact-name" name="name" type="text" placeholder="John Snow" required>
+              <span class="form-validation">Please enter your name</span>
             </div>
             <div class="form-field">
               <label for="contact-email">Your Email</label>
               <input id="contact-email" name="email" type="email" placeholder="john@example.com" required>
+              <span class="form-validation">Please enter a valid email</span>
             </div>
             <div class="form-field">
               <label for="contact-subject">Subject</label>
               <input id="contact-subject" name="subject" type="text" placeholder="General inquiry" required>
+              <span class="form-validation">Please enter a subject</span>
             </div>
             <div class="form-field">
               <label for="contact-msg">Message</label>
               <textarea id="contact-msg" name="message" placeholder="Write your question or feedback here" required></textarea>
+              <span class="form-validation">Please enter your message</span>
             </div>
-            <button type="submit">Send Message</button>
+            <button type="submit"><span class="spinner"></span>Send Message</button>
           </form>
         </article>
       </section>
@@ -424,15 +536,30 @@
     </footer>
   </main>
 
+  <div id="toast-container"></div>
+
   <script>
+    function showToast(message, type = 'success') {
+      const container = document.getElementById('toast-container');
+      const toast = document.createElement('div');
+      toast.className = `toast ${type}`;
+      toast.textContent = message;
+      container.appendChild(toast);
+
+      setTimeout(() => {
+        toast.style.animation = 'slideIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) reverse';
+        setTimeout(() => toast.remove(), 400);
+      }, 3000);
+    }
+
     async function sendForm(event, type) {
       event.preventDefault();
 
       var form = event.target;
       var btn = form.querySelector('button[type="submit"]');
-      var originalText = btn.textContent;
+      var originalHTML = btn.innerHTML;
       btn.disabled = true;
-      btn.textContent = 'Sending…';
+      btn.classList.add('loading');
 
       var data = {};
       if (type === 'join') {
@@ -441,6 +568,10 @@
         data.level   = document.getElementById('join-level').value;
         data.terrain = document.getElementById('join-terrain').value.trim();
         data.message = document.getElementById('join-msg').value.trim();
+
+        // save to localStorage
+        localStorage.setItem('pbsc_name', data.name);
+        localStorage.setItem('pbsc_email', data.email);
       } else {
         data.name    = document.getElementById('contact-name').value.trim();
         data.email   = document.getElementById('contact-email').value.trim();
@@ -456,20 +587,26 @@
         });
 
         if (res.ok) {
-          btn.textContent = '✓ Sent!';
+          btn.innerHTML = '✓ Sent!';
           btn.style.background = '#6ee7b7';
+          btn.style.color = '#0f5f3f';
           form.reset();
+          showToast("We'll be in touch soon!", 'success');
         } else {
           throw new Error('Server error');
         }
       } catch (e) {
-        btn.textContent = 'Error — try again';
+        btn.innerHTML = '✗ Error';
         btn.style.background = '#fca5a5';
-        btn.disabled = false;
+        btn.style.color = '#5f0f0f';
+        showToast('Failed to send. Please try again.', 'error');
+
         setTimeout(function() {
-          btn.textContent = originalText;
+          btn.innerHTML = originalHTML;
           btn.style.background = '';
+          btn.style.color = '';
           btn.disabled = false;
+          btn.classList.remove('loading');
         }, 3000);
       }
 
@@ -492,6 +629,13 @@
       if (type === 'join') {
         joinCard.classList.add('active');
         document.querySelector('.cta-primary').classList.add('active');
+
+        // prefill from localStorage
+        var savedName = localStorage.getItem('pbsc_name');
+        var savedEmail = localStorage.getItem('pbsc_email');
+        if (savedName) document.getElementById('join-name').value = savedName;
+        if (savedEmail) document.getElementById('join-email').value = savedEmail;
+
         joinCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
       } else if (type === 'contact') {
         contactCard.classList.add('active');

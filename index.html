@@ -6,6 +6,8 @@
   <title>Palm Beach Ski Club</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎿</text></svg>">
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;500;700&display=swap');
+
     * {
       margin: 0;
       padding: 0;
@@ -13,143 +15,417 @@
     }
 
     body {
-      background-color: #0a1628;
-      color: #ffffff;
-      font-family: 'Georgia', serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
       min-height: 100vh;
-      text-align: center;
-      padding: 2rem;
+      font-family: 'Poppins', sans-serif;
+      color: #e8f2ff;
+      background: radial-gradient(circle at top, #1f4369 0%, #0d1a35 38%, #080f1f 100%);
+      position: relative;
+      overflow-x: hidden;
     }
 
-    .container {
-      max-width: 640px;
-      flex: 1;
+    body::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url('https://images.unsplash.com/photo-1598110003358-3f56e0273433?auto=format&fit=crop&w=1400&q=80') center/cover no-repeat;
+      opacity: 0.14;
+      z-index: 0;
+      filter: blur(1.8px);
+    }
+
+    .page {
+      position: relative;
+      z-index: 1;
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 3rem 1.4rem 4rem;
+    }
+
+    .hero {
+      background: rgba(16, 35, 57, 0.72);
+      border: 1px solid rgba(167, 206, 244, 0.45);
+      backdrop-filter: blur(10px);
+      border-radius: 24px;
+      padding: 2.4rem 1.8rem;
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.45);
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.4rem;
+      text-align: center;
+    }
+
+    .hero-inner {
       display: flex;
       flex-direction: column;
+      gap: 1.1rem;
       align-items: center;
       justify-content: center;
     }
 
     .logo-svg {
-      width: 180px;
-      height: 180px;
-      margin-bottom: 2rem;
-      opacity: 0.92;
+      width: 152px;
+      height: 152px;
+      margin-bottom: 0.35rem;
+      transform: translateY(-6px);
     }
 
     h1 {
-      font-size: 2.6rem;
-      letter-spacing: 0.06em;
-      margin-bottom: 1.2rem;
-      color: #ffffff;
-      line-height: 1.2;
-    }
-
-    .divider {
-      width: 60px;
-      height: 2px;
-      background-color: #7fafd4;
-      margin: 0 auto 1.4rem;
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 3vw, 3.2rem);
+      color: #f4f9ff;
+      letter-spacing: 0.04em;
+      line-height: 1.1;
     }
 
     .tagline {
-      font-size: 1.1rem;
-      color: #a0b8d8;
+      font-size: clamp(0.95rem, 1.5vw, 1.3rem);
+      color: #aac8e8;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      margin-bottom: 2rem;
+      font-weight: 700;
+      margin-bottom: 0.8rem;
+    }
+
+    .highlight {
+      background: linear-gradient(135deg, rgba(128, 217, 255, 0.85), rgba(110, 170, 234, 0.9));
+      color: #03335b;
+      padding: 0.14rem 0.5rem;
+      border-radius: 999px;
+      font-weight: 700;
+    }
+
+    .email-link,
+    .cta-primary {
+      border-radius: 999px;
+      font-weight: 700;
+      text-decoration: none;
+      letter-spacing: 0.08em;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, color 0.2s ease, background 0.2s ease;
     }
 
     .email-link {
-      display: inline-block;
-      font-size: 0.95rem;
-      color: #7fafd4;
-      text-decoration: none;
-      letter-spacing: 0.05em;
-      border-bottom: 1px solid rgba(127, 175, 212, 0.4);
-      padding-bottom: 2px;
-      transition: color 0.2s, border-color 0.2s;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.72rem 1.15rem;
+      border: 1px solid rgba(135, 182, 220, 0.76);
+      background: rgba(27, 51, 81, 0.44);
+      color: #d9f1ff;
+      gap: 0.45rem;
+      font-size: 0.94rem;
     }
 
     .email-link:hover {
-      color: #b8d4ec;
-      border-color: rgba(184, 212, 236, 0.7);
+      transform: translateY(-1px);
+      box-shadow: 0 12px 22px rgba(43, 109, 171, 0.36);
+      color: #ffffff;
+      border-color: rgba(200, 228, 255, 0.85);
+      background: rgba(40, 82, 133, 0.8);
+    }
+
+    .cta-primary {
+      display: inline-block;
+      padding: 0.78rem 1.35rem;
+      color: #0f2f55;
+      background: #abd7ff;
+      border: 1px solid rgba(209, 236, 255, 0.7);
+      box-shadow: 0 10px 18px rgba(35, 82, 133, 0.28);
+    }
+
+    .cta-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 22px rgba(33, 82, 133, 0.35);
+      background: #c1ebff;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+      margin-top: 1.2rem;
+      text-align: left;
+    }
+
+    .feature {
+      background: rgba(12, 24, 44, 0.65);
+      border: 1px solid rgba(147, 184, 218, 0.28);
+      border-radius: 14px;
+      padding: 1rem;
+      min-height: 110px;
+      box-shadow: inset 0 0 14px rgba(8, 16, 29, 0.3);
+    }
+
+    .feature h3 {
+      font-size: 1rem;
+      margin-bottom: 0.55rem;
+      color: #e6f7ff;
+    }
+
+    .feature p {
+      color: #bcd7eb;
+      line-height: 1.45;
+      font-size: 0.92rem;
+    }
+
+    .forms-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1rem;
+      margin-top: 1.3rem;
+      text-align: left;
+    }
+
+    .form-card {
+      background: rgba(20, 45, 72, 0.75);
+      border: 1px solid rgba(167, 206, 244, 0.42);
+      border-radius: 14px;
+      padding: 1.1rem;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
+    }
+
+    .form-card h3 {
+      color: #f1fbff;
+      margin-bottom: 0.55rem;
+      font-size: 1.08rem;
+    }
+
+    .form-field {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 0.72rem;
+    }
+
+    .form-field label {
+      font-size: 0.83rem;
+      color: #c6ddf1;
+      margin-bottom: 0.25rem;
+      font-weight: 500;
+    }
+
+    .form-field input,
+    .form-field select,
+    .form-field textarea {
+      border: 1px solid rgba(161, 197, 230, 0.45);
+      border-radius: 8px;
+      background: rgba(9, 22, 38, 0.65);
+      color: #e8f2ff;
+      padding: 0.65rem 0.7rem;
+      font: inherit;
+    }
+
+    .form-field textarea {
+      min-height: 90px;
+      resize: vertical;
+    }
+
+    .form-card button {
+      margin-top: 0.25rem;
+      padding: 0.62rem 1rem;
+      border-radius: 999px;
+      border: 1px solid rgba(143, 196, 239, 0.7);
+      background: #abd7ff;
+      color: #0f2f55;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .form-card button:hover {
+      transform: translateY(-1px);
+      background: #c1ebff;
+      box-shadow: 0 10px 20px rgba(31, 81, 130, 0.36);
     }
 
     footer {
-      width: 100%;
-      padding: 1.5rem 2rem;
+      margin-top: 1.8rem;
       text-align: center;
-      font-size: 0.78rem;
-      color: #4a6080;
-      letter-spacing: 0.05em;
+      color: #9ab7d6;
+      font-size: 0.8rem;
+      letter-spacing: 0.07em;
+      padding: 1.1rem 0.4rem;
+    }
+
+    @media (max-width: 720px) {
+      .page {
+        padding: 1.4rem 0.9rem 2.8rem;
+      }
+
+      .hero {
+        padding: 1.8rem 1rem;
+      }
     }
   </style>
 </head>
 <body>
+  <main class="page">
+    <section class="hero">
+      <div class="hero-inner">
+        <svg class="logo-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img">
+          <circle cx="100" cy="100" r="96" fill="#0d1f3c" stroke="#2a4a6e" stroke-width="2"/>
+          <polygon points="100,30 145,110 55,110" fill="#d6e8f5"/>
+          <polygon points="100,30 108,48 92,48" fill="#ffffff"/>
+          <polygon points="148,55 183,115 113,115" fill="#b8d4ec"/>
+          <polygon points="148,55 155,70 141,70" fill="#e8f3fb"/>
+          <polygon points="52,65 82,115 22,115" fill="#c5ddf0"/>
+          <polygon points="52,65 58,78 46,78" fill="#edf5fc"/>
+          <ellipse cx="100" cy="140" rx="80" ry="18" fill="#ddeef8" opacity="0.6"/>
+          <line x1="68" y1="138" x2="88" y2="118" stroke="#aaccee" stroke-width="1.5" stroke-linecap="round" opacity="0.7"/>
+          <line x1="74" y1="138" x2="94" y2="118" stroke="#aaccee" stroke-width="1.5" stroke-linecap="round" opacity="0.7"/>
+          <circle cx="115" cy="107" r="5" fill="#f4c26a"/>
+          <line x1="115" y1="112" x2="113" y2="124" stroke="#e8e8e8" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="113" y1="116" x2="107" y2="121" stroke="#e8e8e8" stroke-width="2" stroke-linecap="round"/>
+          <line x1="113" y1="116" x2="122" y2="119" stroke="#e8e8e8" stroke-width="2" stroke-linecap="round"/>
+          <line x1="113" y1="124" x2="108" y2="130" stroke="#e8e8e8" stroke-width="2" stroke-linecap="round"/>
+          <line x1="113" y1="124" x2="118" y2="130" stroke="#e8e8e8" stroke-width="2" stroke-linecap="round"/>
+          <line x1="105" y1="131" x2="117" y2="130" stroke="#f4c26a" stroke-width="2" stroke-linecap="round"/>
+          <line x1="115" y1="131" x2="127" y2="130" stroke="#f4c26a" stroke-width="2" stroke-linecap="round"/>
+          <line x1="107" y1="121" x2="103" y2="130" stroke="#aaaaaa" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="122" y1="119" x2="126" y2="129" stroke="#aaaaaa" stroke-width="1.5" stroke-linecap="round"/>
+          <circle cx="40" cy="45" r="1.2" fill="#ffffff" opacity="0.8"/>
+          <circle cx="160" cy="38" r="1" fill="#ffffff" opacity="0.7"/>
+          <circle cx="170" cy="60" r="0.8" fill="#ffffff" opacity="0.5"/>
+          <circle cx="28" cy="70" r="1" fill="#ffffff" opacity="0.6"/>
+          <circle cx="155" cy="75" r="0.7" fill="#ffffff" opacity="0.5"/>
+        </svg>
 
-  <div class="container">
+        <h1>Palm Beach Ski Club</h1>
+        <p class="tagline">Currently at après — check back soon</p>
+        <div style="display:flex;gap:0.9rem;flex-wrap:wrap;justify-content:center;">
+          <a class="email-link" href="#contact">Contact Us</a>
+          <a class="cta-primary" href="#join">Join Waitlist</a>
+        </div>
+      </div>
 
-    <!-- Inline SVG logo: mountain + skier scene -->
-    <svg class="logo-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-label="Palm Beach Ski Club">
-      <!-- Sky background circle -->
-      <circle cx="100" cy="100" r="96" fill="#0d1f3c" stroke="#2a4a6e" stroke-width="2"/>
+      <div class="feature-grid" aria-label="Club features">
+        <article class="feature">
+          <h3>Snow & Sun</h3>
+          <p>World-class skiing events and luxury après-ski social evenings, curated for community and comfort.</p>
+        </article>
+        <article class="feature">
+          <h3>Elite Community</h3>
+          <p>Connect with passionate outdoors people, pro coaching, and member-only ski retreats each season.</p>
+        </article>
+        <article class="feature">
+          <h3>Club Experiences</h3>
+          <p>Seasonal journeys, charity races, and VIP ski parties in aspirational mountain venues.</p>
+        </article>
+      </div>
 
-      <!-- Snow mountains -->
-      <polygon points="100,30 145,110 55,110" fill="#d6e8f5"/>
-      <polygon points="100,30 108,48 92,48" fill="#ffffff"/>
+      <section class="forms-grid" aria-label="Join and Contact forms">
+        <article class="form-card" id="join">
+          <h3>Join Waitlist</h3>
+          <form onsubmit="return sendForm(event, 'join')" autocomplete="on">
+            <div class="form-field">
+              <label for="join-name">Full Name</label>
+              <input id="join-name" name="name" type="text" placeholder="Jane Ski" required>
+            </div>
+            <div class="form-field">
+              <label for="join-email">Email</label>
+              <input id="join-email" name="email" type="email" placeholder="jane@example.com" required>
+            </div>
+            <div class="form-field">
+              <label for="join-level">Ski Level</label>
+              <select id="join-level" name="level" required>
+                <option value="">Select level</option>
+                <option>Beginner</option>
+                <option>Intermediate</option>
+                <option>Advanced</option>
+                <option>Expert / Pro</option>
+              </select>
+            </div>
+            <div class="form-field">
+              <label for="join-terrain">Favorite Terrain</label>
+              <input id="join-terrain" name="terrain" type="text" placeholder="Powder, groomers, moguls...">
+            </div>
+            <div class="form-field">
+              <label for="join-msg">Message (optional)</label>
+              <textarea id="join-msg" name="message" placeholder="Tell us why you want to join"></textarea>
+            </div>
+            <button type="submit">Send Join Request</button>
+          </form>
+        </article>
 
-      <polygon points="148,55 183,115 113,115" fill="#b8d4ec"/>
-      <polygon points="148,55 155,70 141,70" fill="#e8f3fb"/>
+        <article class="form-card" id="contact">
+          <h3>Contact Us</h3>
+          <form onsubmit="return sendForm(event, 'contact')" autocomplete="on">
+            <div class="form-field">
+              <label for="contact-name">Your Name</label>
+              <input id="contact-name" name="name" type="text" placeholder="John Snow" required>
+            </div>
+            <div class="form-field">
+              <label for="contact-email">Your Email</label>
+              <input id="contact-email" name="email" type="email" placeholder="john@example.com" required>
+            </div>
+            <div class="form-field">
+              <label for="contact-subject">Subject</label>
+              <input id="contact-subject" name="subject" type="text" placeholder="General inquiry" required>
+            </div>
+            <div class="form-field">
+              <label for="contact-msg">Message</label>
+              <textarea id="contact-msg" name="message" placeholder="Write your question or feedback here" required></textarea>
+            </div>
+            <button type="submit">Send Message</button>
+          </form>
+        </article>
+      </section>
+    </section>
 
-      <polygon points="52,65 82,115 22,115" fill="#c5ddf0"/>
-      <polygon points="52,65 58,78 46,78" fill="#edf5fc"/>
+    <footer>
+      Palm Beach Ski Club™ · © 2026 All rights reserved
+    </footer>
+  </main>
 
-      <!-- Base snow -->
-      <ellipse cx="100" cy="140" rx="80" ry="18" fill="#ddeef8" opacity="0.6"/>
+  <script>
+    async function sendForm(event, type) {
+      event.preventDefault();
 
-      <!-- Ski tracks -->
-      <line x1="68" y1="138" x2="88" y2="118" stroke="#aaccee" stroke-width="1.5" stroke-linecap="round" opacity="0.7"/>
-      <line x1="74" y1="138" x2="94" y2="118" stroke="#aaccee" stroke-width="1.5" stroke-linecap="round" opacity="0.7"/>
+      var form = event.target;
+      var btn = form.querySelector('button[type="submit"]');
+      var originalText = btn.textContent;
+      btn.disabled = true;
+      btn.textContent = 'Sending…';
 
-      <!-- Skier -->
-      <!-- Body -->
-      <circle cx="115" cy="107" r="5" fill="#f4c26a"/>
-      <line x1="115" y1="112" x2="113" y2="124" stroke="#e8e8e8" stroke-width="2.5" stroke-linecap="round"/>
-      <!-- Arms -->
-      <line x1="113" y1="116" x2="107" y2="121" stroke="#e8e8e8" stroke-width="2" stroke-linecap="round"/>
-      <line x1="113" y1="116" x2="122" y2="119" stroke="#e8e8e8" stroke-width="2" stroke-linecap="round"/>
-      <!-- Legs + skis -->
-      <line x1="113" y1="124" x2="108" y2="130" stroke="#e8e8e8" stroke-width="2" stroke-linecap="round"/>
-      <line x1="113" y1="124" x2="118" y2="130" stroke="#e8e8e8" stroke-width="2" stroke-linecap="round"/>
-      <line x1="105" y1="131" x2="117" y2="130" stroke="#f4c26a" stroke-width="2" stroke-linecap="round"/>
-      <line x1="115" y1="131" x2="127" y2="130" stroke="#f4c26a" stroke-width="2" stroke-linecap="round"/>
-      <!-- Poles -->
-      <line x1="107" y1="121" x2="103" y2="130" stroke="#aaaaaa" stroke-width="1.5" stroke-linecap="round"/>
-      <line x1="122" y1="119" x2="126" y2="129" stroke="#aaaaaa" stroke-width="1.5" stroke-linecap="round"/>
+      var data = {};
+      if (type === 'join') {
+        data.name    = document.getElementById('join-name').value.trim();
+        data.email   = document.getElementById('join-email').value.trim();
+        data.level   = document.getElementById('join-level').value;
+        data.terrain = document.getElementById('join-terrain').value.trim();
+        data.message = document.getElementById('join-msg').value.trim();
+      } else {
+        data.name    = document.getElementById('contact-name').value.trim();
+        data.email   = document.getElementById('contact-email').value.trim();
+        data.subject = document.getElementById('contact-subject').value.trim();
+        data.message = document.getElementById('contact-msg').value.trim();
+      }
 
-      <!-- Stars -->
-      <circle cx="40" cy="45" r="1.2" fill="#ffffff" opacity="0.8"/>
-      <circle cx="160" cy="38" r="1" fill="#ffffff" opacity="0.7"/>
-      <circle cx="170" cy="60" r="0.8" fill="#ffffff" opacity="0.5"/>
-      <circle cx="28" cy="70" r="1" fill="#ffffff" opacity="0.6"/>
-      <circle cx="155" cy="75" r="0.7" fill="#ffffff" opacity="0.5"/>
-    </svg>
+      try {
+        var res = await fetch('/api/' + type, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        });
 
-    <h1>Palm Beach Ski Club</h1>
-    <div class="divider"></div>
-    <p class="tagline">Currently at après &mdash; check back soon</p>
-    <a class="email-link" href="mailto:info@palmbeachskiclub.org">info@palmbeachskiclub.org</a>
+        if (res.ok) {
+          btn.textContent = '✓ Sent!';
+          btn.style.background = '#6ee7b7';
+          form.reset();
+        } else {
+          throw new Error('Server error');
+        }
+      } catch (e) {
+        btn.textContent = 'Error — try again';
+        btn.style.background = '#fca5a5';
+        btn.disabled = false;
+        setTimeout(function() {
+          btn.textContent = originalText;
+          btn.style.background = '';
+          btn.disabled = false;
+        }, 3000);
+      }
 
-  </div>
-
-  <footer>
-    Palm Beach Ski Club&trade; &nbsp;&bull;&nbsp; &copy; 2026 All rights reserved
-  </footer>
-
+      return false;
+    }
+  </script>
 </body>
 </html>

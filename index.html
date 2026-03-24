@@ -99,6 +99,36 @@
       font-weight: 700;
     }
 
+    h1 {
+      background: linear-gradient(92deg, #c6e9ff, #8dcdfd, #7fc8fc, #d7f8ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shimmer 4s linear infinite;
+    }
+
+    @keyframes shimmer {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .page::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background-image: radial-gradient(circle, rgba(255,255,255,0.15) 1px, transparent 1px), radial-gradient(circle, rgba(255,255,255,0.08) 1px, transparent 1px);
+      background-size: 70px 70px, 120px 120px;
+      opacity: 0.4;
+      animation: drift 20s linear infinite;
+      mix-blend-mode: screen;
+    }
+
+    @keyframes drift {
+      0% { transform: translate3d(0,0,0); }
+      100% { transform: translate3d(-40px, 40px, 0); }
+    }
+
     .email-link,
     .cta-primary {
       border-radius: 999px;
@@ -475,7 +505,29 @@
       const video = document.querySelector('.bg-video');
       if (video) {
         video.playbackRate = 0.5; // Adjust to 0.3 for even slower
+
+        // lazy-play when hero is visible
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              video.muted = true;
+              video.play().catch(() => {});
+            } else {
+              video.pause();
+            }
+          });
+        }, { threshold: 0.25 });
+
+        observer.observe(document.querySelector('.hero'));
       }
+
+      // parallax scroll for video
+      window.addEventListener('scroll', function() {
+        const scrolled = window.scrollY;
+        if (video) {
+          video.style.transform = 'translateY(' + (scrolled * 0.15) + 'px) scale(1.03)';
+        }
+      });
     });
   </script>
 </body>

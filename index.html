@@ -6,7 +6,7 @@
   <title>Palm Beach Ski Club</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎿</text></svg>">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;500;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Crimson+Pro:wght@700&family=Poppins:wght@300;500;700&display=swap');
 
     * {
       margin: 0;
@@ -23,14 +23,16 @@
       overflow-x: hidden;
     }
 
-    body::before {
-      content: '';
+    .bg-video {
       position: absolute;
-      inset: 0;
-      background: url('https://images.unsplash.com/photo-1598110003358-3f56e0273433?auto=format&fit=crop&w=1400&q=80') center/cover no-repeat;
-      opacity: 0.14;
-      z-index: 0;
-      filter: blur(1.8px);
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1;
+      opacity: 0.2;
+      filter: blur(0.5px);
     }
 
     .page {
@@ -63,17 +65,20 @@
     }
 
     .logo-svg {
-      width: 152px;
-      height: 152px;
+      width: 304px;
+      height: auto;
+      max-height: 304px;
       margin-bottom: 0.35rem;
       transform: translateY(-6px);
+      display: block;
+      object-fit: contain;
     }
 
     h1 {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Crimson Pro', 'Playfair Display', serif;
       font-size: clamp(2rem, 3vw, 3.2rem);
       color: #f4f9ff;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.02em;
       line-height: 1.1;
     }
 
@@ -257,36 +262,13 @@
   </style>
 </head>
 <body>
+  <video autoplay muted loop playsinline preload="metadata" class="bg-video">
+    <source src="backgroundvideo.mp4" type="video/mp4">
+  </video>
   <main class="page">
     <section class="hero">
       <div class="hero-inner">
-        <svg class="logo-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img">
-          <circle cx="100" cy="100" r="96" fill="#0d1f3c" stroke="#2a4a6e" stroke-width="2"/>
-          <polygon points="100,30 145,110 55,110" fill="#d6e8f5"/>
-          <polygon points="100,30 108,48 92,48" fill="#ffffff"/>
-          <polygon points="148,55 183,115 113,115" fill="#b8d4ec"/>
-          <polygon points="148,55 155,70 141,70" fill="#e8f3fb"/>
-          <polygon points="52,65 82,115 22,115" fill="#c5ddf0"/>
-          <polygon points="52,65 58,78 46,78" fill="#edf5fc"/>
-          <ellipse cx="100" cy="140" rx="80" ry="18" fill="#ddeef8" opacity="0.6"/>
-          <line x1="68" y1="138" x2="88" y2="118" stroke="#aaccee" stroke-width="1.5" stroke-linecap="round" opacity="0.7"/>
-          <line x1="74" y1="138" x2="94" y2="118" stroke="#aaccee" stroke-width="1.5" stroke-linecap="round" opacity="0.7"/>
-          <circle cx="115" cy="107" r="5" fill="#f4c26a"/>
-          <line x1="115" y1="112" x2="113" y2="124" stroke="#e8e8e8" stroke-width="2.5" stroke-linecap="round"/>
-          <line x1="113" y1="116" x2="107" y2="121" stroke="#e8e8e8" stroke-width="2" stroke-linecap="round"/>
-          <line x1="113" y1="116" x2="122" y2="119" stroke="#e8e8e8" stroke-width="2" stroke-linecap="round"/>
-          <line x1="113" y1="124" x2="108" y2="130" stroke="#e8e8e8" stroke-width="2" stroke-linecap="round"/>
-          <line x1="113" y1="124" x2="118" y2="130" stroke="#e8e8e8" stroke-width="2" stroke-linecap="round"/>
-          <line x1="105" y1="131" x2="117" y2="130" stroke="#f4c26a" stroke-width="2" stroke-linecap="round"/>
-          <line x1="115" y1="131" x2="127" y2="130" stroke="#f4c26a" stroke-width="2" stroke-linecap="round"/>
-          <line x1="107" y1="121" x2="103" y2="130" stroke="#aaaaaa" stroke-width="1.5" stroke-linecap="round"/>
-          <line x1="122" y1="119" x2="126" y2="129" stroke="#aaaaaa" stroke-width="1.5" stroke-linecap="round"/>
-          <circle cx="40" cy="45" r="1.2" fill="#ffffff" opacity="0.8"/>
-          <circle cx="160" cy="38" r="1" fill="#ffffff" opacity="0.7"/>
-          <circle cx="170" cy="60" r="0.8" fill="#ffffff" opacity="0.5"/>
-          <circle cx="28" cy="70" r="1" fill="#ffffff" opacity="0.6"/>
-          <circle cx="155" cy="75" r="0.7" fill="#ffffff" opacity="0.5"/>
-        </svg>
+        <img src="logo.png" alt="Palm Beach Ski Club" class="logo-svg">
 
         <h1>Palm Beach Ski Club</h1>
         <p class="tagline">Currently at après — check back soon</p>
@@ -426,6 +408,14 @@
 
       return false;
     }
+
+    // Slow down background video
+    document.addEventListener('DOMContentLoaded', function() {
+      const video = document.querySelector('.bg-video');
+      if (video) {
+        video.playbackRate = 0.5; // Adjust to 0.3 for even slower
+      }
+    });
   </script>
 </body>
 </html>
